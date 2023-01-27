@@ -42,7 +42,6 @@
 
 <script>
 import axios from 'axios';
-
 import Wrapper from 'TodoRouterDir/components/Wrapper/index.vue';
 import Navi from 'TodoRouterDir/components/Navi/index.vue';
 import { ErrorMessage, EmptyMessage } from 'TodoRouterDir/components/Message';

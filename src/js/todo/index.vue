@@ -153,7 +153,7 @@ export default {
     hideError() {
       this.errorMessage = '';
     },
-    showError() {
+    showError(err) {
       if (err.response.data) {
           this.errorMessage = err.response.data.message;
         } else {

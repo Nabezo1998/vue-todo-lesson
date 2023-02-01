@@ -15,8 +15,8 @@ const store = new Vuex.Store({
       detail: '',
       completed: '',
     },
-    errorMessage: 'エラーが起きました。',
-    emptyMessage: 'やることリストは空です。',
+    errorMessage: '',
+    emptyMessage: '',
   },
   getters: {
     completedTodos: state => state.todos.filter(todo => todo.completed),
@@ -30,11 +30,11 @@ const store = new Vuex.Store({
     },
     setEmptyMessage(state, routeName) {
       if (routeName === 'completedTodos') {
-        let emptyMessage = '完了済みのやることリストはありません。';
+        state.emptyMessage = '完了済みのやることリストはありません。';
       } else if (routeName === 'incompleteTodos') {
-        let emptyMessage = '未完了のやることリストはありません。';
+        state.emptyMessage = '未完了のやることリストはありません。';
       } else {
-        let emptyMessage = 'やることリストには何も登録されていません。';
+        state.emptyMessage = 'やることリストには何も登録されていません。';
       }
     },
     initTargetTodo(state) {
@@ -46,11 +46,11 @@ const store = new Vuex.Store({
       };
     },
     hideError(state) {
-      state.errorMessage = 'エラーが起きました。';
+      state.errorMessage = '';
     },
-    showError(state, payload) {
-      if (payload) {
-        const errorMessage = payload.data;
+    showError(state, err) {
+      if (err.response) {
+        state.errorMessage = err.response.data;
       } else {
         state.errorMessage = 'ネットに接続がされていない、もしくはサーバーとの接続がされていません。ご確認ください。';
       }

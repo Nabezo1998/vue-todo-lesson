@@ -3,11 +3,11 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   computed: {
-    emptyMessage: function() {
-      return this.$store.state.emptyMessage;
-    },
+    ...mapState(['emptyMessage']),
   },
 };
 </script>

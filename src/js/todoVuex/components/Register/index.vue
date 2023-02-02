@@ -40,10 +40,14 @@
 <script>
 export default {
   computed: {
-    targetTodo: () => this.$store.state.targetTodo,
+    targetTodo() {
+      return this.$store.state.targetTodo;
+    },
     title: {
-      get: () => this.$store.state.targetTodo.title,
-      set: value => {
+      get() {
+        return this.$store.state.targetTodo.title;
+      },
+      set(value) {
         this.$store.dispatch({
           type: 'updateTargetTodo',
           name: 'title',
@@ -52,8 +56,10 @@ export default {
       },
     },
     detail: {
-      get: () => this.$store.state.targetTodo.detail,
-      set: value => {
+      get() {
+        return this.$store.state.targetTodo.detail;
+      },
+      set(value) {
         this.$store.dispatch({
           type: 'updateTargetTodo',
           name: 'detail',
@@ -61,16 +67,16 @@ export default {
         });
       },
     },
-    rows: () => {
+    rows() {
       const num = this.targetTodo.detail.split('\n').length;
       return (num > 3) ? num : 3;
     },
   },
   methods: {
-    addTodo: () => {
+    addTodo() {
       this.$store.dispatch('addTodo');
     },
-    editTodo: () => {
+    editTodo() {
       this.$store.dispatch('editTodo');
     },
   },

@@ -27,24 +27,28 @@ export default {
     appNavi: Navi,
   },
   computed: {
-    todoFilter: () => this.$store.state.todoFilter,
-    todos: () => {
+    todoFilter() {
+      return this.$store.state.todoFilter;
+    },
+    todos() {
       if (this.todoFilter === 'allTodos') {
         return this.$store.state.todos;
       }
       return this.$store.getters[this.todoFilter];
     },
-    errorMessage: () => this.$store.state.errorMessage,
+    errorMessage() {
+      return this.$store.state.errorMessage;
+    },
   },
   watch: {
-    todos: todos => {
+    todos(todos) {
       if (!todos.length) this.$store.dispatch('setEmptyMessage', this.todoFilter);
     },
-    $route: to => {
+    $route(to) {
       this.$store.dispatch('setTodoFilter', to.name);
     },
   },
-  created: () => {
+  created() {
     this.$store.dispatch('getTodos');
     this.$store.dispatch('setTodoFilter', this.$route.name);
   },

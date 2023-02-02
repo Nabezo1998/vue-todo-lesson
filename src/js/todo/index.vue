@@ -6,7 +6,7 @@
       </header>
 
       <main class="main">
-        <form class="register" 
+        <form class="register"
           @submit.prevent="targetTodo.id ? editTodo() : addTodo()"
         >
           <div class="register__input">
@@ -48,15 +48,15 @@
         <div class="todos">
           <template v-if="todos.length">
             <ul class="todos__list">
-              <li 
-              v-for="todo in todos" 
+              <li
+              v-for="todo in todos"
               :key="todo.id"
               :class="{ 'is-completed': todo.completed}"
               >
                 <div class="todos__inner">
                   <div class="todos__completed">
-                    <button 
-                    class="todos__completed__btn" 
+                    <button
+                    class="todos__completed__btn"
                     type="button"
                     @click="changeCompleted(todo)"
                     >
@@ -73,15 +73,15 @@
                     <p class="todos__desc__detail">{{ todo.detail }}</p>
                   </div>
                   <div class="todos__btn">
-                    <button 
-                      class="todos__btn__edit" 
+                    <button
+                      class="todos__btn__edit"
                       type="button"
                       @click="showEditor(todo)"
                     >
                       編集
                     </button>
-                    <button 
-                      class="todos__btn__delete" 
+                    <button
+                      class="todos__btn__delete"
                       type="button"
                       @click="deleteTodo(todo.id)"
                     >
@@ -137,7 +137,7 @@ export default {
       if (err.response.data) {
         this.errorMessage = err.response.data.message;
       } else {
-        this.errorMessage = 'ネットに接続されていない、もしくはサーバーとの接続されていません。ご確認ください。'
+        this.errorMessage = 'ネットに接続されていない、もしくはサーバーとの接続されていません。ご確認ください。';
       }
     });
   },
@@ -155,15 +155,15 @@ export default {
     },
     showError(err) {
       if (err.response.data) {
-          this.errorMessage = err.response.data.message;
-        } else {
-          this.errorMessage = 'ネットに接続がされていない、もしくはサーバーとの接続がされていません。ご確認ください。';
-        }
+        this.errorMessage = err.response.data.message;
+      } else {
+        this.errorMessage = 'ネットに接続がされていない、もしくはサーバーとの接続がされていません。ご確認ください。';
+      }
     },
     addTodo() {
       const postTodo = {
-      title: this.targetTodo.title,
-      detail: this.targetTodo.detail,
+        title: this.targetTodo.title,
+        detail: this.targetTodo.detail,
       };
       axios.post('http://localhost:3000/api/todos/', postTodo).then(({ data }) => {
         this.todos.unshift(data);
@@ -176,7 +176,7 @@ export default {
       this.targetTodo = this.initTargetTodo();
       const targetTodo = { ...todo };
       axios.patch(`http://localhost:3000/api/todos/${targetTodo.id}`, {
-      completed: !targetTodo.completed,
+        completed: !targetTodo.completed,
       }).then(({ data }) => {
         this.todos = this.todos.map(todoItem => {
           if (todoItem.id === targetTodo.id) return data;
@@ -188,7 +188,7 @@ export default {
       });
     },
     showEditor(todo) {
-      this.targetTodo = {...todo};
+      this.targetTodo = { ...todo };
     },
     editTodo() {
       const targetTodo = this.todos.find(todo => todo.id === this.targetTodo.id);
@@ -223,7 +223,7 @@ export default {
       });
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

@@ -45,22 +45,13 @@ export default {
   props: {
     todo: {
       type: Object,
-      default: function() {
-        return {};
-      },
+      default: () => [],
     },
   },
   methods: {
-    changeCompleted: function(todo) {
-      this.$store.dispatch('changeCompleted', todo);
-    },
-    showEditor: function(todo) {
-      this.$store.dispatch('showEditor', todo);
-    },
-    deleteTodo: function(id) {
-      this.$store.dispatch('deleteTodo', id);
-    },
-    
+    changeCompleted: todo => this.$store.dispatch('changeCompleted', todo),
+    showEditor: todo => this.$store.dispatch('showEditor', todo),
+    deleteTodo: id => this.$store.dispatch('deleteTodo', id),
   },
 };
 </script>
